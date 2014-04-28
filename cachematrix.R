@@ -27,29 +27,3 @@ cacheSolve <- function(x, ...) { #new function. accepts the list of functions ge
   x$setmatrix(m) # set the m vector to the inverted matrix, outside function scope
   m # return the inverted matrix
 }
-
-makeVector <- function(x = numeric()) {
-  m <- NULL
-  set <- function(y) {
-    x <<- y
-    m <<- NULL
-  }
-  get <- function() x
-  setmean <- function(mea) m <<- mea
-  getmean <- function() m
-  list(set = set, get = get,
-       setmean = setmean,
-       getmean = getmean)
-}
-
-cacheMean <- function(x, ...) {
-  m <- x$getmean()
-  if(!is.null(m)) {
-    message("getting cached data")
-    return(m)
-  }
-  data <- x$get()
-  m <- mean(data, ...)
-  x$setmean(m)
-  m
-}
